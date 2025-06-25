@@ -1,0 +1,20 @@
+workflows:
+  build-android:
+    name: Build Android APK
+    max_build_duration: 15
+    environment:
+      android_signing:
+        - UrubusGPT_keystore
+      vars:
+        PACKAGE_NAME: "com.urubusgpt.app"
+    scripts:
+      - name: Build APK
+        script: |
+          ./gradlew clean
+          ./gradlew assembleDebug
+    artifacts:
+      - app/build/outputs/**/*.apk
+    publishing:
+      email:
+        recipients:
+          - ton.email@gmail.com
